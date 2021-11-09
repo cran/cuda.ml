@@ -1,7 +1,7 @@
 Package: cuda.ml
 Type: Package
 Title: R Interface for the RAPIDS cuML Suite of Libraries
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     c(person(given = "Yitao",
            family = "Li",
@@ -35,10 +35,10 @@ RoxygenNote: 7.1.2
 OS_type: unix
 SystemRequirements: RAPIDS cuML (see https://rapids.ai/start.html)
 NeedsCompilation: yes
-Packaged: 2021-11-03 17:23:10 UTC; yitaoli
+Packaged: 2021-11-08 00:02:55 UTC; yitaoli
 Author: Yitao Li [aut, cph, cre] (<https://orcid.org/0000-0002-1261-905X>),
   Tomasz Kalinowski [cph, ctb],
   Daniel Falbel [cph, ctb],
   RStudio [cph, fnd]
 Repository: CRAN
-Date/Publication: 2021-11-04 20:40:05 UTC
+Date/Publication: 2021-11-09 16:50:12 UTC

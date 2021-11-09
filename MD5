@@ -1,4 +1,4 @@
-d99e5e1b8d1f5cc2324df7e218f76794 *DESCRIPTION
+2b58c20bdda19f6e50b6ddba40cbc3c6 *DESCRIPTION
 c5449d2d1755777faaea6a8d7e4fa08b *LICENSE
 1bb822dfd6fcfd7d2804c5aa83844846 *NAMESPACE
 206bf0496f01890dfd07e7b31f897e30 *R/RcppExports.R
@@ -61,6 +61,7 @@ a697ee33cdfc401ae75c32b0218e8b44 *man/has_cuML.Rd
 e048bf8f344da7e6afe366a0004d41c7 *man/predict.cuda_ml_rand_forest.Rd
 5dbb04281fdcd81d39217ff71218db2d *man/predict.cuda_ml_svm.Rd
 735849ada469a01f1cfb91b8438301ac *src/CMakeLists.txt.in
+ed4b7007ea32743adc74c28e93d4b7dc *src/Makevars.in
 773d53e32a87177f713f36c44a30244e *src/RcppExports.cpp
 fd03004408490e7f78cf51799c081bd0 *src/agglomerative_clustering.cpp
 0ddfa1987d5309b9140898479c4cd935 *src/agglomerative_clustering.cu
@@ -152,7 +153,7 @@ ac751323888e300f4d124e84d0d966b4 *src/umap.cpp
 0264509098ccbcdb9366f6af3605b9c6 *src/umap.cu
 cd3ddee8cdd1deb723aaeedc5ed6fd31 *src/umap.h
 f6ea34d74c45f76f34fb932549b5ae51 *src/unique_marker.cuh
-c0f78fd5004a997f134d8f955692a44c *src/warn_cuml_missing.h
+b8ed4dcccbd753fc05eef6b63e7418cd *src/warn_cuml_missing.h
 d5bc5e8994a3988a49faf18d3b742072 *tests/testthat.R
 5d1d39906def65efd45d3ae8fe52da83 *tests/testthat/helper-initialize.R
 229a4d1def1c53b4a93d92681d841a9d *tests/testthat/test-agglomerative.R
@@ -175,4 +176,4 @@ af8125c41cbdd9d4dff7b7f9e68f2863 *tests/testthat/test-svm-serde.R
 67d43d73a2f85906377698eeba755304 *tests/testthat/test-umap.R
 8b6b0a0e61f4d2cfbafcff6d1ef6d559 *tools/config.R
 a4503c191f7df0d0ca43068893357658 *tools/config/cleanup.R
-f38d50791bd8c62fddf4c9a5aadcc151 *tools/config/configure.R
+baaa0f0d9f474c9d7011bb8e692db955 *tools/config/configure.R

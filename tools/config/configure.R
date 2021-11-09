@@ -18,8 +18,6 @@
 #'                `libcuml` if no existing `libcuml` is specified with the
 #'                'CUML_PREFIX' env variable. Set DOWNLOAD_CUML=0 to disable
 #'                this default behavior.
-
-
 format_msg <- function(...) {
   msg <- c(...)
 
@@ -53,7 +51,10 @@ check_path <- function(path) {
 # A list containing libcuml download links for "cuml_versions" and CUDA major versions.
 libcuml_versions <- list(
   "21.08" = list(
-    "11" = "https://github.com/mlverse/libcuml-builds/releases/download/v21.08/libcuml-cu11.4.2.zip"
+    "11" = "https://github.com/mlverse/libcuml-builds/releases/download/v21.08-cuda11.2.1/libcuml-21.08-cuda11.2.1.zip"
+  ),
+  "21.10" = list(
+    "11" = "https://github.com/mlverse/libcuml-builds/releases/download/v21.10-cuda11.2.1/libcuml-21.10-cuda11.2.1.zip"
   )
 )
 
@@ -80,6 +81,10 @@ download_libcuml <- function(cuml_version = Sys.getenv("CUML_VERSION", unset = "
 
   download.file(url, tmp)
   unzip(tmp, exdir = ".")
+
+  zip_file_name <- basename(url)
+  dir_name <- gsub("\\.zip$", "", zip_file_name)
+  file.rename(file.path(".", dir_name), file.path(".", "libcuml"))
 }
 
 pkg_root <- function() {
@@ -279,17 +284,8 @@ if (is.null(find_nvcc(stop_if_missing = FALSE)) || !has_libcuml()) {
   wd <- getwd()
   on.exit(setwd(wd))
   setwd(pkg_root())
-  stubs_header_dir <- normalizePath(file.path(getwd(), "src", "stubs"))
-  writeLines(
-    c(
-      sprintf("PKG_CPPFLAGS = -I'%s'", stubs_header_dir),
-      # optimize for size
-      "strippedLib: $(SHLIB)",
-      "\tif test -e '/usr/bin/strip'; then /usr/bin/strip --strip-debug $(SHLIB); fi",
-      ".phony: strippedLib"
-    ),
-    con = file.path(pkg_root(), "src", "Makevars")
-  )
+  define(PKG_CPPFLAGS = normalizePath(file.path(getwd(), "src", "stubs")))
 } else {
+  define(PKG_CPPFLAGS = "")
   run_cmake()
 }
