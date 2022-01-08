@@ -12,15 +12,11 @@ lasso_validate_alpha <- function(alpha) {
 #' @template supervised-model-inputs
 #' @template supervised-model-output
 #' @template ellipsis-unused
-#' @template lm
+#' @template fit-intercept
+#' @template normalize-input
+#' @template coordinate-descend
 #' @param alpha Multiplier of the L1 penalty term (i.e., the result would become
 #'   and Ordinary Least Square model if \code{alpha} were set to 0). Default: 1.
-#' @param max_iter The maximum number of coordinate descent iterations.
-#'   Default: 1000L.
-#' @param tol Stop the coordinate descent when the duality gap is below this
-#'   threshold. Default: 1e-3.
-#' @param selection If "random", then instead of updating coefficients in cyclic
-#'   order, a random coefficient is updated in each iteration. Default: "cyclic".
 #'
 #' @return A LASSO regressor that can be used with the 'predict' S3 generic to
 #'   make predictions on new data points.
@@ -30,7 +26,7 @@ lasso_validate_alpha <- function(alpha) {
 #' library(cuda.ml)
 #'
 #' model <- cuda_ml_lasso(formula = mpg ~ ., data = mtcars, alpha = 1e-3)
-#' predictions <- predict(model, mtcars)
+#' cuda_ml_predictions <- predict(model, mtcars)
 #'
 #' # predictions will be comparable to those from a `glmnet` model with `lambda`
 #' # set to 1e-3 and `alpha` set to 1
@@ -45,12 +41,21 @@ lasso_validate_alpha <- function(alpha) {
 #' )
 #'
 #' glm_predictions <- predict(
-#'   glmnet_model, as.matrix(mtcars[names(mtcars) != "mpg"]), s = 0
+#'   glmnet_model, as.matrix(mtcars[names(mtcars) != "mpg"]),
+#'   s = 0
 #' )
 #'
-#' print(max(abs(glm_predictions - predictions$.pred)))
+#' print(
+#'   all.equal(
+#'     as.numeric(glm_predictions),
+#'     cuda_ml_predictions$.pred,
+#'     tolerance = 1e-2
+#'   )
+#' )
+#' @importFrom ellipsis check_dots_used
 #' @export
 cuda_ml_lasso <- function(x, ...) {
+  check_dots_used()
   UseMethod("cuda_ml_lasso")
 }
 
@@ -149,12 +154,11 @@ cuda_ml_lasso.recipe <- function(x, data,
 }
 
 cuda_ml_lasso_bridge <- function(processed,
-                                 alpha = 1,
-                                 max_iter = 1000L, tol = 1e-3,
-                                 fit_intercept = TRUE,
-                                 normalize_input = FALSE,
-                                 selection = c("cyclic", "random"),
-                                 ...) {
+                                 alpha,
+                                 max_iter, tol,
+                                 fit_intercept,
+                                 normalize_input,
+                                 selection = c("cyclic", "random")) {
   validate_lm_input(processed)
   lasso_validate_alpha(alpha)
   selection <- match.arg(selection)

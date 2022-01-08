@@ -143,19 +143,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// glm_predict
-Rcpp::NumericVector glm_predict(SEXP input, SEXP coef, double const intercept);
-RcppExport SEXP _cuda_ml_glm_predict(SEXP inputSEXP, SEXP coefSEXP, SEXP interceptSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type coef(coefSEXP);
-    Rcpp::traits::input_parameter< double const >::type intercept(interceptSEXP);
-    rcpp_result_gen = Rcpp::wrap(glm_predict(input, coef, intercept));
-    return rcpp_result_gen;
-END_RCPP
-}
 // kmeans
 Rcpp::List kmeans(Rcpp::NumericMatrix const& x, int const k, int const max_iters, double const tol, int const init_method, Rcpp::NumericMatrix const& centroids, int const seed, int const verbosity);
 RcppExport SEXP _cuda_ml_kmeans(SEXP xSEXP, SEXP kSEXP, SEXP max_itersSEXP, SEXP tolSEXP, SEXP init_methodSEXP, SEXP centroidsSEXP, SEXP seedSEXP, SEXP verbositySEXP) {
@@ -245,6 +232,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// lm_predict
+Rcpp::NumericVector lm_predict(SEXP input, SEXP coef, double const intercept);
+RcppExport SEXP _cuda_ml_lm_predict(SEXP inputSEXP, SEXP coefSEXP, SEXP interceptSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type coef(coefSEXP);
+    Rcpp::traits::input_parameter< double const >::type intercept(interceptSEXP);
+    rcpp_result_gen = Rcpp::wrap(lm_predict(input, coef, intercept));
+    return rcpp_result_gen;
+END_RCPP
+}
 // ols_fit
 Rcpp::List ols_fit(Rcpp::NumericMatrix const& x, Rcpp::NumericVector const& y, bool const fit_intercept, bool const normalize_input, int const algo);
 RcppExport SEXP _cuda_ml_ols_fit(SEXP xSEXP, SEXP ySEXP, SEXP fit_interceptSEXP, SEXP normalize_inputSEXP, SEXP algoSEXP) {
@@ -309,6 +309,44 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::List const& >::type model_state(model_stateSEXP);
     rcpp_result_gen = Rcpp::wrap(pca_set_state(model_state));
+    return rcpp_result_gen;
+END_RCPP
+}
+// qn_fit
+Rcpp::List qn_fit(Rcpp::NumericMatrix const& X, Rcpp::IntegerVector const& y, int const n_classes, int const loss_type, bool const fit_intercept, double const l1, double const l2, int const max_iters, double const tol, double const delta, int const linesearch_max_iters, int const lbfgs_memory, Rcpp::NumericVector const& sample_weight);
+RcppExport SEXP _cuda_ml_qn_fit(SEXP XSEXP, SEXP ySEXP, SEXP n_classesSEXP, SEXP loss_typeSEXP, SEXP fit_interceptSEXP, SEXP l1SEXP, SEXP l2SEXP, SEXP max_itersSEXP, SEXP tolSEXP, SEXP deltaSEXP, SEXP linesearch_max_itersSEXP, SEXP lbfgs_memorySEXP, SEXP sample_weightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix const& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector const& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< int const >::type n_classes(n_classesSEXP);
+    Rcpp::traits::input_parameter< int const >::type loss_type(loss_typeSEXP);
+    Rcpp::traits::input_parameter< bool const >::type fit_intercept(fit_interceptSEXP);
+    Rcpp::traits::input_parameter< double const >::type l1(l1SEXP);
+    Rcpp::traits::input_parameter< double const >::type l2(l2SEXP);
+    Rcpp::traits::input_parameter< int const >::type max_iters(max_itersSEXP);
+    Rcpp::traits::input_parameter< double const >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< double const >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< int const >::type linesearch_max_iters(linesearch_max_itersSEXP);
+    Rcpp::traits::input_parameter< int const >::type lbfgs_memory(lbfgs_memorySEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector const& >::type sample_weight(sample_weightSEXP);
+    rcpp_result_gen = Rcpp::wrap(qn_fit(X, y, n_classes, loss_type, fit_intercept, l1, l2, max_iters, tol, delta, linesearch_max_iters, lbfgs_memory, sample_weight));
+    return rcpp_result_gen;
+END_RCPP
+}
+// qn_predict
+Rcpp::NumericVector qn_predict(Rcpp::NumericMatrix const& X, int const n_classes, Rcpp::NumericMatrix const& coefs, int const loss_type, bool const fit_intercept);
+RcppExport SEXP _cuda_ml_qn_predict(SEXP XSEXP, SEXP n_classesSEXP, SEXP coefsSEXP, SEXP loss_typeSEXP, SEXP fit_interceptSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix const& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int const >::type n_classes(n_classesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix const& >::type coefs(coefsSEXP);
+    Rcpp::traits::input_parameter< int const >::type loss_type(loss_typeSEXP);
+    Rcpp::traits::input_parameter< bool const >::type fit_intercept(fit_interceptSEXP);
+    rcpp_result_gen = Rcpp::wrap(qn_predict(X, n_classes, coefs, loss_type, fit_intercept));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -522,6 +560,31 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double const >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< int const >::type algo(algoSEXP);
     rcpp_result_gen = Rcpp::wrap(ridge_fit(x, y, fit_intercept, normalize_input, alpha, algo));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sgd_fit
+Rcpp::List sgd_fit(Rcpp::NumericMatrix const& x, Rcpp::NumericVector const& y, bool const fit_intercept, int const batch_size, int const epochs, int const lr_type, double const eta0, double const power_t, int const loss, int const penalty, double const alpha, double const l1_ratio, bool const shuffle, double const tol, int const n_iter_no_change);
+RcppExport SEXP _cuda_ml_sgd_fit(SEXP xSEXP, SEXP ySEXP, SEXP fit_interceptSEXP, SEXP batch_sizeSEXP, SEXP epochsSEXP, SEXP lr_typeSEXP, SEXP eta0SEXP, SEXP power_tSEXP, SEXP lossSEXP, SEXP penaltySEXP, SEXP alphaSEXP, SEXP l1_ratioSEXP, SEXP shuffleSEXP, SEXP tolSEXP, SEXP n_iter_no_changeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix const& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector const& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< bool const >::type fit_intercept(fit_interceptSEXP);
+    Rcpp::traits::input_parameter< int const >::type batch_size(batch_sizeSEXP);
+    Rcpp::traits::input_parameter< int const >::type epochs(epochsSEXP);
+    Rcpp::traits::input_parameter< int const >::type lr_type(lr_typeSEXP);
+    Rcpp::traits::input_parameter< double const >::type eta0(eta0SEXP);
+    Rcpp::traits::input_parameter< double const >::type power_t(power_tSEXP);
+    Rcpp::traits::input_parameter< int const >::type loss(lossSEXP);
+    Rcpp::traits::input_parameter< int const >::type penalty(penaltySEXP);
+    Rcpp::traits::input_parameter< double const >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double const >::type l1_ratio(l1_ratioSEXP);
+    Rcpp::traits::input_parameter< bool const >::type shuffle(shuffleSEXP);
+    Rcpp::traits::input_parameter< double const >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int const >::type n_iter_no_change(n_iter_no_changeSEXP);
+    rcpp_result_gen = Rcpp::wrap(sgd_fit(x, y, fit_intercept, batch_size, epochs, lr_type, eta0, power_t, loss, penalty, alpha, l1_ratio, shuffle, tol, n_iter_no_change));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -793,18 +856,20 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cuda_ml_fil_load_model", (DL_FUNC) &_cuda_ml_fil_load_model, 9},
     {"_cuda_ml_fil_get_num_classes", (DL_FUNC) &_cuda_ml_fil_get_num_classes, 1},
     {"_cuda_ml_fil_predict", (DL_FUNC) &_cuda_ml_fil_predict, 3},
-    {"_cuda_ml_glm_predict", (DL_FUNC) &_cuda_ml_glm_predict, 3},
     {"_cuda_ml_kmeans", (DL_FUNC) &_cuda_ml_kmeans, 8},
     {"_cuda_ml_knn_classifier_fit", (DL_FUNC) &_cuda_ml_knn_classifier_fit, 6},
     {"_cuda_ml_knn_classifier_predict", (DL_FUNC) &_cuda_ml_knn_classifier_predict, 3},
     {"_cuda_ml_knn_classifier_predict_probabilities", (DL_FUNC) &_cuda_ml_knn_classifier_predict_probabilities, 3},
     {"_cuda_ml_knn_regressor_fit", (DL_FUNC) &_cuda_ml_knn_regressor_fit, 6},
     {"_cuda_ml_knn_regressor_predict", (DL_FUNC) &_cuda_ml_knn_regressor_predict, 3},
+    {"_cuda_ml_lm_predict", (DL_FUNC) &_cuda_ml_lm_predict, 3},
     {"_cuda_ml_ols_fit", (DL_FUNC) &_cuda_ml_ols_fit, 5},
     {"_cuda_ml_pca_fit_transform", (DL_FUNC) &_cuda_ml_pca_fit_transform, 8},
     {"_cuda_ml_pca_inverse_transform", (DL_FUNC) &_cuda_ml_pca_inverse_transform, 2},
     {"_cuda_ml_pca_get_state", (DL_FUNC) &_cuda_ml_pca_get_state, 1},
     {"_cuda_ml_pca_set_state", (DL_FUNC) &_cuda_ml_pca_set_state, 1},
+    {"_cuda_ml_qn_fit", (DL_FUNC) &_cuda_ml_qn_fit, 13},
+    {"_cuda_ml_qn_predict", (DL_FUNC) &_cuda_ml_qn_predict, 5},
     {"_cuda_ml_rf_classifier_fit", (DL_FUNC) &_cuda_ml_rf_classifier_fit, 16},
     {"_cuda_ml_rf_classifier_predict", (DL_FUNC) &_cuda_ml_rf_classifier_predict, 3},
     {"_cuda_ml_rf_classifier_predict_class_probabilities", (DL_FUNC) &_cuda_ml_rf_classifier_predict_class_probabilities, 2},
@@ -820,6 +885,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_cuda_ml_rproj_get_state", (DL_FUNC) &_cuda_ml_rproj_get_state, 1},
     {"_cuda_ml_rproj_set_state", (DL_FUNC) &_cuda_ml_rproj_set_state, 1},
     {"_cuda_ml_ridge_fit", (DL_FUNC) &_cuda_ml_ridge_fit, 6},
+    {"_cuda_ml_sgd_fit", (DL_FUNC) &_cuda_ml_sgd_fit, 15},
     {"_cuda_ml_svc_fit", (DL_FUNC) &_cuda_ml_svc_fit, 13},
     {"_cuda_ml_svc_predict", (DL_FUNC) &_cuda_ml_svc_predict, 3},
     {"_cuda_ml_svc_get_state", (DL_FUNC) &_cuda_ml_svc_get_state, 1},

@@ -15,7 +15,8 @@ ols_match_method <- function(method = c("svd", "eig", "qr")) {
 #' @template supervised-model-inputs
 #' @template supervised-model-output
 #' @template ellipsis-unused
-#' @template lm
+#' @template fit-intercept
+#' @template normalize-input
 #' @param method Must be one of {"svd", "eig", "qr"}.
 #'
 #'   - "svd": compute SVD decomposition using Jacobi iterations.
@@ -49,8 +50,10 @@ ols_match_method <- function(method = c("svd", "eig", "qr")) {
 #'     tolerance = 1e-3
 #'   )
 #' )
+#' @importFrom ellipsis check_dots_used
 #' @export
 cuda_ml_ols <- function(x, ...) {
+  check_dots_used()
   UseMethod("cuda_ml_ols")
 }
 
@@ -129,10 +132,9 @@ cuda_ml_ols.recipe <- function(x, data,
 }
 
 cuda_ml_ols_bridge <- function(processed,
-                               method = c("svd", "eig", "qr"),
-                               fit_intercept = TRUE,
-                               normalize_input = FALSE,
-                               ...) {
+                               method,
+                               fit_intercept,
+                               normalize_input) {
   validate_lm_input(processed)
 
   x <- as.matrix(processed$predictors)

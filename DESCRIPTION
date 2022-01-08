@@ -1,11 +1,11 @@
 Package: cuda.ml
 Type: Package
 Title: R Interface for the RAPIDS cuML Suite of Libraries
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: 
     c(person(given = "Yitao",
            family = "Li",
-           role = c("aut", "cph", "cre"),
+           role = c("aut", "cph"),
            email = "yitao@rstudio.com",
            comment = c(ORCID = "0000-0002-1261-905X")),
       person(given = "Tomasz",
@@ -14,11 +14,11 @@ Authors@R:
              email = "tomasz.kalinowski@rstudio.com"),
       person(given = "Daniel",
              family = "Falbel",
-             role = c("cph", "ctb"),
+             role = c("aut", "cre", "cph"),
              email = "daniel@rstudio.com"),
       person(given = "RStudio",
            role = c("cph", "fnd")))
-Maintainer: Yitao Li <yitao@rstudio.com>
+Maintainer: Daniel Falbel <daniel@rstudio.com>
 Description: R interface for RAPIDS cuML (<https://github.com/rapidsai/cuml>),
     a suite of GPU-accelerated machine learning libraries powered by CUDA
     (<https://en.wikipedia.org/wiki/CUDA>).
@@ -35,10 +35,10 @@ RoxygenNote: 7.1.2
 OS_type: unix
 SystemRequirements: RAPIDS cuML (see https://rapids.ai/start.html)
 NeedsCompilation: yes
-Packaged: 2021-11-08 00:02:55 UTC; yitaoli
-Author: Yitao Li [aut, cph, cre] (<https://orcid.org/0000-0002-1261-905X>),
+Packaged: 2022-01-07 22:00:35 UTC; yitaoli
+Author: Yitao Li [aut, cph] (<https://orcid.org/0000-0002-1261-905X>),
   Tomasz Kalinowski [cph, ctb],
-  Daniel Falbel [cph, ctb],
+  Daniel Falbel [aut, cre, cph],
   RStudio [cph, fnd]
 Repository: CRAN
-Date/Publication: 2021-11-09 16:50:12 UTC
+Date/Publication: 2022-01-08 01:42:47 UTC

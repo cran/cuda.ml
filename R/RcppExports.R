@@ -41,10 +41,6 @@
     .Call(`_cuda_ml_fil_predict`, model, x, output_class_probabilities)
 }
 
-.glm_predict <- function(input, coef, intercept) {
-    .Call(`_cuda_ml_glm_predict`, input, coef, intercept)
-}
-
 .kmeans <- function(x, k, max_iters, tol, init_method, centroids, seed, verbosity) {
     .Call(`_cuda_ml_kmeans`, x, k, max_iters, tol, init_method, centroids, seed, verbosity)
 }
@@ -69,6 +65,10 @@
     .Call(`_cuda_ml_knn_regressor_predict`, model, x, n_neighbors)
 }
 
+.lm_predict <- function(input, coef, intercept) {
+    .Call(`_cuda_ml_lm_predict`, input, coef, intercept)
+}
+
 .ols_fit <- function(x, y, fit_intercept, normalize_input, algo) {
     .Call(`_cuda_ml_ols_fit`, x, y, fit_intercept, normalize_input, algo)
 }
@@ -87,6 +87,14 @@
 
 .pca_set_state <- function(model_state) {
     .Call(`_cuda_ml_pca_set_state`, model_state)
+}
+
+.qn_fit <- function(X, y, n_classes, loss_type, fit_intercept, l1, l2, max_iters, tol, delta, linesearch_max_iters, lbfgs_memory, sample_weight) {
+    .Call(`_cuda_ml_qn_fit`, X, y, n_classes, loss_type, fit_intercept, l1, l2, max_iters, tol, delta, linesearch_max_iters, lbfgs_memory, sample_weight)
+}
+
+.qn_predict <- function(X, n_classes, coefs, loss_type, fit_intercept) {
+    .Call(`_cuda_ml_qn_predict`, X, n_classes, coefs, loss_type, fit_intercept)
 }
 
 .rf_classifier_fit <- function(input, labels, n_trees, bootstrap, max_samples, n_streams, max_depth, max_leaves, max_features, n_bins, min_samples_leaf, min_samples_split, split_criterion, min_impurity_decrease, max_batch_size, verbosity) {
@@ -147,6 +155,10 @@
 
 .ridge_fit <- function(x, y, fit_intercept, normalize_input, alpha, algo) {
     .Call(`_cuda_ml_ridge_fit`, x, y, fit_intercept, normalize_input, alpha, algo)
+}
+
+.sgd_fit <- function(x, y, fit_intercept, batch_size, epochs, lr_type, eta0, power_t, loss, penalty, alpha, l1_ratio, shuffle, tol, n_iter_no_change) {
+    .Call(`_cuda_ml_sgd_fit`, x, y, fit_intercept, batch_size, epochs, lr_type, eta0, power_t, loss, penalty, alpha, l1_ratio, shuffle, tol, n_iter_no_change)
 }
 
 .svc_fit <- function(input, labels, cost, kernel, gamma, coef0, degree, tol, max_iter, nochange_steps, cache_size, sample_weights, verbosity) {
